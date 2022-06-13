@@ -1,10 +1,9 @@
-﻿using EntityFrameworkVsDapper.Benchmark.Domain.Common;
-using EntityFrameworkVsDapper.Benchmark.Persistence;
-using EntityFrameworkVsDapper.Benchmark.Program.Contracts.Repository;
+﻿using EntityFrameworkVsDapper.Benchmark.Domain.Contracts.Repository;
+using EntityFrameworkVsDapper.Benchmark.Domain.Entities;
 
 namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class BaseRepository : IBaseRepository
     {
         protected readonly BenchmarkDbContext _context;
         public BaseRepository(BenchmarkDbContext context)
@@ -12,9 +11,9 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<T> GetByIdAsync(int id, CancellationToken cancellationToken)
+        public Benches GetById(int id)
         {
-            return await _context.Set<T>().FindAsync(new object[] { id }, cancellationToken);
+            return _context.Benches.Find(new object[] { id });
         }
     }
 }

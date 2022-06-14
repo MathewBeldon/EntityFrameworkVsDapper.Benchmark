@@ -1,9 +1,10 @@
-﻿using EntityFrameworkVsDapper.Benchmark.Domain.Contracts.Repository;
-using EntityFrameworkVsDapper.Benchmark.Domain.Entities;
+﻿using EntityFrameworkVsDapper.Benchmark.Domain.Common;
+using EntityFrameworkVsDapper.Benchmark.Domain.Contracts.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
 {
-    public class BaseRepository : IBaseRepository
+    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         protected readonly BenchmarkDbContext _context;
         public BaseRepository(BenchmarkDbContext context)
@@ -11,9 +12,9 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Benches GetById(int id)
+        public T GetById(int id)
         {
-            return _context.Benches.Find(new object[] { id });
+            return _context.Set<T>().AsNoTracking().SingleOrDefault(x => x.Id == id);
         }
     }
 }

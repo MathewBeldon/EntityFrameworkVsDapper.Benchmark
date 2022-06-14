@@ -1,11 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EntityFrameworkVsDapper.Benchmark.Domain.Common;
 
 namespace EntityFrameworkVsDapper.Benchmark.Domain.Entities
 {
-    public sealed class Benches
+    public sealed class Benches : BaseEntity
     {
-        [Key]
-        public int BenchId { get; init; }
         public string Name { get; init; }
         public string Description { get; init; }
         public int Cost { get; init; }

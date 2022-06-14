@@ -1,9 +1,9 @@
-﻿using EntityFrameworkVsDapper.Benchmark.Domain.Entities;
+﻿using EntityFrameworkVsDapper.Benchmark.Domain.Common;
 
 namespace EntityFrameworkVsDapper.Benchmark.Domain.Contracts.Repository
 {
-    public interface IBaseRepository
+    public interface IBaseRepository<T> where T : BaseEntity
     {
-        Benches GetById(int id);
+        T GetById(int id);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using EntityFrameworkVsDapper.Benchmark.Domain.Common;
-using EntityFrameworkVsDapper.Benchmark.Domain.Contracts.Repository;
+using EntityFrameworkVsDapper.Benchmark.Core.Common;
+using EntityFrameworkVsDapper.Benchmark.Core.Contracts.Repository;
 
 namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
 {

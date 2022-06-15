@@ -10,6 +10,6 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Constants
     {
         public const string ConnectionString = "Server=localhost;Database=ef_dapper_benchmark;Uid=sa;Pwd=MyPassword;";
         public const string MySqlVersion = "8.0.0";
-        public const int BenchRecordCount = 100000;
+        public const int BenchRecordCount = 10000;
     }
 }

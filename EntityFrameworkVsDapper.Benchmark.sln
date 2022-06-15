@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Ben
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Benchmark.Program", "EntityFrameworkVsDapper.Benchmark.Program\EntityFrameworkVsDapper.Benchmark.Program.csproj", "{2990B0F3-AD62-48B9-8978-9A214B389F52}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Benchmark.Domain", "EntityFrameworkVsDapper.Benchmark.Domain\EntityFrameworkVsDapper.Benchmark.Domain.csproj", "{DFBFDBB5-D207-417B-8EA5-1D022ABAB0C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Benchmark.Core", "EntityFrameworkVsDapper.Benchmark.Domain\EntityFrameworkVsDapper.Benchmark.Core.csproj", "{DFBFDBB5-D207-417B-8EA5-1D022ABAB0C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkVsDapper.Benchmark.Dapper", "EntityFrameworkVsDapper.Benchmark.Dapper\EntityFrameworkVsDapper.Benchmark.Dapper.csproj", "{DF6260EE-0932-47E8-A4F4-AC59CC5A3416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Benchmark.Dapper", "EntityFrameworkVsDapper.Benchmark.Dapper\EntityFrameworkVsDapper.Benchmark.Dapper.csproj", "{DF6260EE-0932-47E8-A4F4-AC59CC5A3416}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -24,6 +24,6 @@
 
 
 	<ItemGroup>
-	  <ProjectReference Include="..\EntityFrameworkVsDapper.Benchmark.Domain\EntityFrameworkVsDapper.Benchmark.Domain.csproj" />
+	  <ProjectReference Include="..\EntityFrameworkVsDapper.Benchmark.Domain\EntityFrameworkVsDapper.Benchmark.Core.csproj" />
 	</ItemGroup>
 </Project>

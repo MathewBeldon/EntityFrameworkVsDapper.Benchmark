@@ -1,4 +1,4 @@
-﻿using EntityFrameworkVsDapper.Benchmark.Domain.Entities;
+﻿using EntityFrameworkVsDapper.Benchmark.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 

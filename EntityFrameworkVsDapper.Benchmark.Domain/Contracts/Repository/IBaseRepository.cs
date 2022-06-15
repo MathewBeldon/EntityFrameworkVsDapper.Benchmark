@@ -1,6 +1,6 @@
-﻿using EntityFrameworkVsDapper.Benchmark.Domain.Common;
+﻿using EntityFrameworkVsDapper.Benchmark.Core.Common;
 
-namespace EntityFrameworkVsDapper.Benchmark.Domain.Contracts.Repository
+namespace EntityFrameworkVsDapper.Benchmark.Core.Contracts.Repository
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {

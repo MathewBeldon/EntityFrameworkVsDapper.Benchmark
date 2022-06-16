@@ -1,4 +1,5 @@
-﻿using EntityFrameworkVsDapper.Benchmark.Core.Entities;
+﻿using EntityFrameworkVsDapper.Benchmark.Core.Common;
+using EntityFrameworkVsDapper.Benchmark.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -14,6 +15,9 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework
         }
 
         public DbSet<Benches> Benches { get; set; }
+        public DbSet<Brands> Brands { get; set; }
+        public DbSet<Materials> Materials { get; set; }
+        public DbSet<Styles> Styles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,18 +26,18 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            //foreach (var entry in ChangeTracker.Entries())
-            //{
-            //    switch (entry.State)
-            //    {
-            //        case EntityState.Added:
-            //            entry.Entity.CreatedDateUtc = DateTime.UtcNow;
-            //            break;
-            //        case EntityState.Modified:
-            //            entry.Entity.ModifiedDateUtc = DateTime.UtcNow;
-            //            break;
-            //    }
-            //}
+            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedDateUtc = DateTime.UtcNow;
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.ModifiedDateUtc = DateTime.UtcNow;
+                        break;
+                }
+            }
 
             return base.SaveChangesAsync(cancellationToken);
         }

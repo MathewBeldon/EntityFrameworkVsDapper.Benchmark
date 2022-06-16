@@ -1,8 +1,8 @@
 ﻿using EntityFrameworkVsDapper.Benchmark.Core.Common;
-using EntityFrameworkVsDapper.Benchmark.Core.Contracts.Repository;
+using EntityFrameworkVsDapper.Benchmark.Core.Contracts.Repository.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
+namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories.Base
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
@@ -14,7 +14,11 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
 
         public T GetById(int id)
         {
-            return _context.Set<T>().AsNoTracking().SingleOrDefault(x => x.Id == id);
+            return _context.Set<T>().AsNoTracking().Single(x => x.Id == id);
+        }
+        public IEnumerable<T> GetAll()
+        {
+            return _context.Set<T>().AsNoTracking().ToList();
         }
     }
 }

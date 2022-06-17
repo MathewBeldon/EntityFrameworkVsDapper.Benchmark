@@ -36,7 +36,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories.Base
                 @$"SELECT * 
                   FROM {_tableName}";
 
-            var commandDefinition = new CommandDefinition(sql);
+            var commandDefinition = new CommandDefinition(sql, flags: CommandFlags.Buffered);
 
             return _context.connection.Query<T>(commandDefinition);
         }

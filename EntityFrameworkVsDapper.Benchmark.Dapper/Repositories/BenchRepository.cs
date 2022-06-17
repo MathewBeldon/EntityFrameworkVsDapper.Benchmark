@@ -19,7 +19,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
             var commandDefinition = new CommandDefinition(sql, new
             {
                 Id = id,
-            });
+            }, flags: CommandFlags.Buffered);
 
             return _context.connection.QuerySingle<Benches>(commandDefinition);
         }
@@ -58,7 +58,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
             var commandDefinition = new CommandDefinition(sql, new
             {
                 Id = id,
-            });
+            }, flags: CommandFlags.Buffered);
 
             return _context.connection.Query<Benches, Materials, Styles, Brands, Benches>
                 (

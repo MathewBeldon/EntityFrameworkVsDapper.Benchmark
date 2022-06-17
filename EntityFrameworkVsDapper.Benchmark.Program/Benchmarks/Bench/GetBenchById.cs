@@ -10,20 +10,14 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks.Bench
             for (int i = 1; i < DatabaseConstants.RecordCount + 1; i++)
             {
                 var result = benchRepository.GetBenchById(i);
-                if (result is null && result.Id != i) throw new NullReferenceException();
+                if (result is not null && result.Id != i) throw new NullReferenceException();
             }
         }
 
         internal static void GetSingleRecord(IBenchRepository benchRepository)
         {
             var result = benchRepository.GetBenchById(1);
-            if (result is null && result.Id != 1) throw new NullReferenceException();
-        }
-
-        internal static void GetSingleRecordPopulated(IBenchRepository benchRespoitory)
-        {
-            var result = benchRespoitory.GetBenchByIdPopulated(1);
             if (result is not null && result.Id != 1) throw new NullReferenceException();
-        }
+        }        
     }
 }

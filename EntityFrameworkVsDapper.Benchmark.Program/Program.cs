@@ -33,7 +33,8 @@ namespace EntityFrameworkVsDapper.Benchmark.Program
             nameof(EntityFramework_Generic_AllRecords),
             nameof(EntityFramework_Bench_SingleRecord),
             nameof(EntityFramework_Bench_SingleRecordLoopAll),
-            nameof(EntityFramework_Bench_SingleRecordPopulated)
+            nameof(EntityFramework_Bench_SingleRecordPopulated),
+            nameof(EntityFramework_Bench_SingleRecordPopulatedLoopAll)
         })]
         public void GlobalSetupEntityFramework()
         {
@@ -57,7 +58,8 @@ namespace EntityFrameworkVsDapper.Benchmark.Program
             nameof(Dapper_Generic_AllRecords),
             nameof(Dapper_Bench_SingleRecord),
             nameof(Dappper_Bench_SingleRecordLoopAll),
-            nameof(Dapper_Bench_SingleRecordPopulated)
+            nameof(Dapper_Bench_SingleRecordPopulated),
+            nameof(Dapper_Bench_SingleRecordPopulatedLoopAll)
         })]
         public void GlobalSetupDapper()
         {
@@ -142,13 +144,25 @@ namespace EntityFrameworkVsDapper.Benchmark.Program
         [Benchmark]
         public void EntityFramework_Bench_SingleRecordPopulated()
         {
-            GetBenchById.GetSingleRecordPopulated(_benchRepository);
+            GetBenchByIdPopulated.GetSingleRecordPopulated(_benchRepository);
         }
 
         [Benchmark]
         public void Dapper_Bench_SingleRecordPopulated()
         {
-            GetBenchById.GetSingleRecordPopulated(_benchRepository);
+            GetBenchByIdPopulated.GetSingleRecordPopulated(_benchRepository);
+        }
+
+        [Benchmark]
+        public void EntityFramework_Bench_SingleRecordPopulatedLoopAll()
+        {
+            GetBenchByIdPopulated.GetSingleRecordPopulatedLoopAll(_benchRepository);
+        }
+
+        [Benchmark]
+        public void Dapper_Bench_SingleRecordPopulatedLoopAll()
+        {
+            GetBenchByIdPopulated.GetSingleRecordPopulatedLoopAll(_benchRepository);
         }
 
         #endregion
@@ -181,7 +195,5 @@ namespace EntityFrameworkVsDapper.Benchmark.Program
 
             return (DbContextOptions<BenchmarkDbContext>)builder.Options;
         }
-    }
-
-    
+    }    
 }

@@ -27,7 +27,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories.Base
                 Id = id,
             }, flags: CommandFlags.Buffered);
 
-            return _context.connection.QuerySingle<T>(commandDefinition);
+            return _context.connection.Query<T>(commandDefinition).First();
         }
 
         public IEnumerable<T> GetAll()

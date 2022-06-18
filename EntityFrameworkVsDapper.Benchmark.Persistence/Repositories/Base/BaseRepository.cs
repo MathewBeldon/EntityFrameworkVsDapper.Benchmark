@@ -14,7 +14,7 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories.Base
 
         public T GetById(int id)
         {
-            return _context.Set<T>().AsNoTracking().Single(x => x.Id == id);
+            return _context.Set<T>().AsNoTracking().First(x => x.Id == id);
         }
         public IEnumerable<T> GetAll()
         {

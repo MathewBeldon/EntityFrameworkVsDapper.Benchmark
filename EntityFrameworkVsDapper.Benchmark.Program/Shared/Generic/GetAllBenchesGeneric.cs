@@ -2,7 +2,7 @@
 using EntityFrameworkVsDapper.Benchmark.Core.Entities;
 using EntityFrameworkVsDapper.Benchmark.Program.Constants;
 
-namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks.Generic
+namespace EntityFrameworkVsDapper.Benchmark.Program.Shared.Generic
 {
     internal static class GetAllBenchesGeneric
     {

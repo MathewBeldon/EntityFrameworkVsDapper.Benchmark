@@ -21,7 +21,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
                 Id = id,
             }, flags: CommandFlags.Buffered);
 
-            return _context.connection.QuerySingle<Benches>(commandDefinition);
+            return _context.connection.Query<Benches>(commandDefinition).First();
         }
 
         public Benches GetBenchByIdPopulated(int id)
@@ -72,7 +72,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
                     },
                     param: new { Id = id }, 
                     splitOn: "Id"
-                ).Single();
+                ).First();
         }
     }
 }

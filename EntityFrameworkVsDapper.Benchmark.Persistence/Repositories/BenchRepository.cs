@@ -10,7 +10,7 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
 
         public Benches GetBenchById(int id)
         {
-            return _context.Benches.Single(x => x.Id == id);
+            return _context.Benches.First(x => x.Id == id);
         }
 
         public Benches GetBenchByIdPopulated(int id)
@@ -102,7 +102,7 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
                         Width = bench.Width,
                         Depth = bench.Depth
                     }
-                ).Single(x => x.Id == id);
+                ).First(x => x.Id == id);
         }
     }
 }

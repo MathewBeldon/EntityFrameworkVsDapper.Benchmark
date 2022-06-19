@@ -1,13 +1,13 @@
 ﻿using BenchmarkDotNet.Attributes;
 using EntityFrameworkVsDapper.Benchmark.Core.Entities;
 using EntityFrameworkVsDapper.Benchmark.EntityFramework;
-using EntityFrameworkVsDapper.Benchmark.Program.Shared.Bench;
-using EntityFrameworkVsDapper.Benchmark.Program.Shared.Generic;
+using EntityFrameworkVsDapper.Benchmark.Program.Constants;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
 {
-    [Description("Entity Framework")]
+    [Description("EF")]
     public class EntityFrameworkBenchmarks : BenchmarkBase
     {        
         private BenchmarkDbContext _context;
@@ -15,7 +15,10 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
         [GlobalSetup]
         public void GlobalSetupEntityFramework()
         {
-            _context = new BenchmarkDbContext(Database.GetOptions());
+            var builder = new DbContextOptionsBuilder<BenchmarkDbContext>();
+            var serverVersion = new MySqlServerVersion(DatabaseConstants.MySqlVersion);
+            builder.UseMySql(DatabaseConstants.ConnectionString, serverVersion);
+            _context = new BenchmarkDbContext(builder.Options);
             _baseGenericBenchRepository = new EntityFramework.Repositories.Base.BaseRepository<Benches>(_context);
             _benchRepository = new EntityFramework.Repositories.BenchRepository(_context);
         }
@@ -26,29 +29,34 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
             _context.Dispose();
         }
 
-        [Benchmark]
-        public void EntityFramework_Generic_OneRecord()
+        [Benchmark(Description = "Single record <T> (interface)")]
+        public void GenericSingleRecord()
         {
-            GetBenchByIdGeneric.GetOneRecord(_baseGenericBenchRepository);
+            GenericSingleRecordShared();
         }
 
-        [Benchmark]
-        public void EntityFramework_Generic_AllRecords()
+        [Benchmark(Description = "Paged records <T> (interface)")]
+        public void GenericPagedRecords()
         {
-            GetAllBenchesGeneric.GetAllRecords(_baseGenericBenchRepository);
+            GenericPagedRecordsShared();
         }
 
-        [Benchmark]
-        public void EntityFramework_Bench_OneRecord()
+        [Benchmark(Description = "Single record (interface)")]
+        public void SingleRecord()
         {
-            GetBenchById.GetOneRecord(_benchRepository);
+            SingleRecordShared();
         }
 
-        [Benchmark]
-        public void EntityFramework_Bench_OneRecordPopulated()
+        [Benchmark(Description = "Single record w/ joins (interface)")]
+        public void SingleRecordPopulated()
         {
-            GetBenchByIdPopulated.GetOneRecordPopulated(_benchRepository);
+            SingleRecordPopulatedShared();
         }
 
+        [Benchmark(Description = "Paged records w/ joins (interface)")]
+        public void PagedRecordsPopulated()
+        {
+            PagedRecordsPopulatedShared();
+        }
     }
 }

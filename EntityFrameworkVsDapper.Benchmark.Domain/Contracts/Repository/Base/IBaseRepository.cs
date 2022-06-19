@@ -5,6 +5,6 @@ namespace EntityFrameworkVsDapper.Benchmark.Core.Contracts.Repository.Base
     public interface IBaseRepository<T> where T : BaseEntity
     {
         T GetById(int id);
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetByIdPaged(int page, int pageSize, int totalCount);
     }
 }

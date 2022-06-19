@@ -2,8 +2,6 @@
 using EntityFrameworkVsDapper.Benchmark.Core.Entities;
 using EntityFrameworkVsDapper.Benchmark.Dapper;
 using EntityFrameworkVsDapper.Benchmark.Program.Constants;
-using EntityFrameworkVsDapper.Benchmark.Program.Shared.Bench;
-using EntityFrameworkVsDapper.Benchmark.Program.Shared.Generic;
 using System.ComponentModel;
 
 namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
@@ -27,28 +25,34 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
             _connection.Dispose();
         }
 
-        [Benchmark]
-        public void Dapper_Generic_OneRecord()
+        [Benchmark(Description = "Single record <T> (interface)")]
+        public void GenericSingleRecord()
         {
-            GetBenchByIdGeneric.GetOneRecord(_baseGenericBenchRepository);
+            GenericSingleRecordShared();
         }
 
-        [Benchmark]
-        public void Dapper_Generic_AllRecords()
+        [Benchmark(Description = "Paged records <T> (interface)")]
+        public void GenericPagedRecords()
         {
-            GetAllBenchesGeneric.GetAllRecords(_baseGenericBenchRepository);
+            GenericPagedRecordsShared();
         }
 
-        [Benchmark]
-        public void Dapper_Bench_OneRecord()
+        [Benchmark(Description = "Single record (interface)")]
+        public void SingleRecord()
         {
-            GetBenchById.GetOneRecord(_benchRepository);
+            SingleRecordShared();
         }
 
-        [Benchmark]
-        public void Dapper_Bench_OneRecordPopulated()
+        [Benchmark(Description = "Single record w/ joins (interface)")]
+        public void SingleRecordPopulated()
         {
-            GetBenchByIdPopulated.GetOneRecordPopulated(_benchRepository);
+            SingleRecordPopulatedShared();
+        }
+
+        [Benchmark(Description = "Paged records w/ joins (interface)")]
+        public void PagedRecordsPopulated()
+        {
+            PagedRecordsPopulatedShared();
         }
     }
 }

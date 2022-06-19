@@ -1,9 +1,11 @@
 ﻿using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
+using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Loggers;
 using BenchmarkDotNet.Order;
+using EntityFrameworkVsDapper.Benchmark.Program.Config.Columns;
 
 namespace EntityFrameworkVsDapper.Benchmark.Program.Config
 {
@@ -15,14 +17,17 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Config
         {
             AddLogger(ConsoleLogger.Default);
 
+            AddExporter(HtmlExporter.Default);
+
             var md = MemoryDiagnoser.Default;
             AddDiagnoser(md);
-            //AddColumn(new ORMColum());
+            AddColumn(new ORMColumn());
             AddColumn(TargetMethodColumn.Method);
-            //AddColumn(new ReturnColum());
             AddColumn(StatisticColumn.Mean);
             AddColumn(StatisticColumn.StdDev);
             AddColumn(StatisticColumn.Error);
+            AddColumn(StatisticColumn.Min);
+            AddColumn(StatisticColumn.Max);
             AddColumn(BaselineRatioColumn.RatioMean);
             AddColumnProvider(DefaultColumnProviders.Metrics);
 
@@ -32,6 +37,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Config
                    .WithUnrollFactor(Iterations)
                    .WithIterationCount(10)
             );
+
             Orderer = new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest);
             Options |= ConfigOptions.JoinSummary;
         }

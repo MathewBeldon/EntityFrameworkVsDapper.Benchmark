@@ -3,17 +3,15 @@
 EntityFramework Vs Dapper
 
 
-|                                      Method |           Mean |        Error |       StdDev |      Gen 0 |     Gen 1 |    Gen 2 |  Allocated |
-|-------------------------------------------- |---------------:|-------------:|-------------:|-----------:|----------:|---------:|-----------:|
-|        EntityFramework_Generic_SingleRecord |       264.7 us |      5.24 us |     10.46 us |     1.4648 |         - |        - |      11 KB |
-|                 Dapper_Generic_SingleRecord |       468.5 us |     30.79 us |     90.78 us |          - |         - |        - |      16 KB |
-| EntityFramework_Generic_SingleRecordLoopAll | 2,562,597.4 us | 27,092.84 us | 24,017.09 us | 18000.0000 |         - |        - | 112,735 KB |
-|          Dapper_Generic_SingleRecordLoopAll | 2,971,009.5 us | 12,145.31 us | 10,141.88 us | 24000.0000 |         - |        - | 148,391 KB |
-|          EntityFramework_Generic_AllRecords |    16,421.2 us |    114.11 us |    106.73 us |   906.2500 |  406.2500 | 125.0000 |   4,944 KB |
-|                   Dapper_Generic_AllRecords |    19,771.2 us |    371.98 us |    725.52 us |  2656.2500 | 1062.5000 | 531.2500 |  15,066 KB |
-|          EntityFramework_Bench_SingleRecord |       246.6 us |      1.66 us |      1.38 us |     1.4648 |         - |        - |      10 KB |
-|                   Dapper_Bench_SingleRecord |       291.3 us |      1.76 us |      1.64 us |     1.9531 |         - |        - |      15 KB |
-|   EntityFramework_Bench_SingleRecordLoopAll | 2,457,185.3 us |  9,053.89 us |  8,469.02 us | 15000.0000 |         - |        - |  97,899 KB |
-|           Dappper_Bench_SingleRecordLoopAll | 2,913,433.9 us |  8,879.90 us |  7,415.11 us | 23000.0000 |         - |        - | 146,673 KB |
-| EntityFramework_Bench_SingleRecordPopulated |       373.4 us |      1.36 us |      1.27 us |     7.8125 |         - |        - |      50 KB |
-|          Dapper_Bench_SingleRecordPopulated |       387.8 us |      2.81 us |      2.63 us |     5.8594 |         - |        - |      37 KB |
+|    ORM |                               Method |     Mean |   StdDev |    Error |      Min |      Max |   Gen 0 |  Gen 1 | Allocated |
+|------- |------------------------------------- |---------:|---------:|---------:|---------:|---------:|--------:|-------:|----------:|
+|     EF |          'Single record (interface)' | 208.8 us |  1.96 us |  3.30 us | 206.8 us | 213.1 us |  0.7500 |      - |      6 KB |
+|     EF |      'Single record <T> (interface)' | 227.5 us |  3.52 us |  5.92 us | 221.1 us | 232.2 us |  0.7500 |      - |      6 KB |
+|     EF | 'Single record w/ joins (interface)' | 250.8 us |  0.89 us |  1.35 us | 249.4 us | 252.1 us |  1.0000 |      - |      7 KB |
+| Dapper |          'Single record (interface)' | 313.4 us | 11.22 us | 18.86 us | 299.8 us | 334.0 us |  2.0000 |      - |     15 KB |
+| Dapper |      'Single record <T> (interface)' | 335.7 us | 12.44 us | 20.90 us | 314.1 us | 353.4 us |  2.0000 |      - |     15 KB |
+|     EF |      'Paged records <T> (interface)' | 351.1 us |  2.86 us |  5.46 us | 348.0 us | 355.9 us |  3.5000 |      - |     22 KB |
+| Dapper |      'Paged records <T> (interface)' | 421.7 us |  8.67 us | 13.10 us | 411.5 us | 437.0 us |  7.5000 |      - |     48 KB |
+| Dapper | 'Single record w/ joins (interface)' | 442.7 us | 18.64 us | 28.18 us | 418.4 us | 473.2 us |  5.0000 |      - |     37 KB |
+|     EF | 'Paged records w/ joins (interface)' | 463.9 us |  3.82 us |  5.77 us | 458.0 us | 470.0 us |  6.0000 |      - |     40 KB |
+| Dapper | 'Paged records w/ joins (interface)' | 667.6 us | 10.77 us | 16.28 us | 653.1 us | 683.2 us | 13.0000 | 1.0000 |     81 KB |

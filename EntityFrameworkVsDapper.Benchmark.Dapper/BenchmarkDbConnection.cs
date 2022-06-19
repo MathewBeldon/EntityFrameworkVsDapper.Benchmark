@@ -6,7 +6,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper
 {
     public class BenchmarkDbConnection : IDisposable
     {
-        internal readonly IDbConnection connection;
+        public readonly IDbConnection connection;
 
         public BenchmarkDbConnection(string connectionString)
         {

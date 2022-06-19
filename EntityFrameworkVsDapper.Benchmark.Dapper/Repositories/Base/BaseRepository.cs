@@ -30,13 +30,22 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories.Base
             return _context.connection.Query<T>(commandDefinition).First();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetByIdPaged(int page, int pageSize, int totalCount)
         {
             string sql =
-                @$"SELECT * 
-                  FROM {_tableName}";
+                @$"
+                    SELECT * 
+                    FROM {_tableName}
+                    WHERE Id <= (@TotalCount - (@PageSize * (@Page - 1)))
+                    ORDER BY Id DESC
+                    LIMIT @PageSize";
 
-            var commandDefinition = new CommandDefinition(sql, flags: CommandFlags.Buffered);
+            var commandDefinition = new CommandDefinition(sql, new
+            {
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalCount
+            }, flags: CommandFlags.Buffered);
 
             return _context.connection.Query<T>(commandDefinition);
         }

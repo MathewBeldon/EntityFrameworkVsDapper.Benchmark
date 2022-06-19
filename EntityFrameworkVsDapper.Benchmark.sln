@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Benchmark.EntityFramework", "EntityFrameworkVsDapper.Benchmark.Persistence\EntityFrameworkVsDapper.Benchmark.EntityFramework.csproj", "{45E528EB-4656-47A8-A967-B4A9B72B497E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Benchmark.Program", "EntityFrameworkVsDapper.Benchmark.Program\EntityFrameworkVsDapper.Benchmark.Program.csproj", "{2990B0F3-AD62-48B9-8978-9A214B389F52}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Benchmark.Core", "EntityFrameworkVsDapper.Benchmark.Domain\EntityFrameworkVsDapper.Benchmark.Core.csproj", "{DFBFDBB5-D207-417B-8EA5-1D022ABAB0C3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Benchmark.Dapper", "EntityFrameworkVsDapper.Benchmark.Dapper\EntityFrameworkVsDapper.Benchmark.Dapper.csproj", "{DF6260EE-0932-47E8-A4F4-AC59CC5A3416}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Benchmark.EntityFramework", "EntityFrameworkVsDapper.Benchmark.EntityFramework\EntityFrameworkVsDapper.Benchmark.EntityFramework.csproj", "{64D8BE6E-49C0-4057-8564-F2F70FBF7AB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{45E528EB-4656-47A8-A967-B4A9B72B497E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45E528EB-4656-47A8-A967-B4A9B72B497E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45E528EB-4656-47A8-A967-B4A9B72B497E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45E528EB-4656-47A8-A967-B4A9B72B497E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2990B0F3-AD62-48B9-8978-9A214B389F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2990B0F3-AD62-48B9-8978-9A214B389F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2990B0F3-AD62-48B9-8978-9A214B389F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{DF6260EE-0932-47E8-A4F4-AC59CC5A3416}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF6260EE-0932-47E8-A4F4-AC59CC5A3416}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF6260EE-0932-47E8-A4F4-AC59CC5A3416}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64D8BE6E-49C0-4057-8564-F2F70FBF7AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64D8BE6E-49C0-4057-8564-F2F70FBF7AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64D8BE6E-49C0-4057-8564-F2F70FBF7AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64D8BE6E-49C0-4057-8564-F2F70FBF7AB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

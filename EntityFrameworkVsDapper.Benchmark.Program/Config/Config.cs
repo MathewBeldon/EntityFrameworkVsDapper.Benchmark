@@ -24,11 +24,8 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Config
             AddColumn(new ORMColumn());
             AddColumn(TargetMethodColumn.Method);
             AddColumn(StatisticColumn.Mean);
-            AddColumn(StatisticColumn.StdDev);
-            AddColumn(StatisticColumn.Error);
             AddColumn(StatisticColumn.Min);
             AddColumn(StatisticColumn.Max);
-            AddColumn(BaselineRatioColumn.RatioMean);
             AddColumnProvider(DefaultColumnProviders.Metrics);
 
             AddJob(Job.ShortRun

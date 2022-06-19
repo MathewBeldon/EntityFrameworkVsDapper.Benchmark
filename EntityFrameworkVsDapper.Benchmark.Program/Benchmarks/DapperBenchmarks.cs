@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using Dapper;
 using EntityFrameworkVsDapper.Benchmark.Core.Entities;
 using EntityFrameworkVsDapper.Benchmark.Dapper;
 using EntityFrameworkVsDapper.Benchmark.Program.Constants;
@@ -22,6 +23,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
         [GlobalCleanup]
         public void GlobalCleanupDapper()
         {
+            _connection.connection.Execute("DELETE FROM Benches WHERE Id > 10000");
             _connection.Dispose();
         }
 
@@ -53,6 +55,12 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
         public void PagedRecordsPopulated()
         {
             PagedRecordsPopulatedShared();
+        }
+
+        [Benchmark(Description = "Create record w/ transactions (interface)")]
+        public void CreateRecord()
+        {
+            CreateRecordShared();
         }
     }
 }

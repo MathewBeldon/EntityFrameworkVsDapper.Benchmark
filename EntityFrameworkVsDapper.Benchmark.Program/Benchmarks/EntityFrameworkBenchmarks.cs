@@ -26,7 +26,9 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
         [GlobalCleanup]
         public void GlobalCleanupEntityFramework()
         {
-            _context.Dispose();
+            var delete = _context.Benches.Where(x => x.Id > 10000);
+            _context.RemoveRange(delete);
+            _context.Dispose();            
         }
 
         [Benchmark(Description = "Single record <T> (interface)")]
@@ -57,6 +59,12 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
         public void PagedRecordsPopulated()
         {
             PagedRecordsPopulatedShared();
+        }
+
+        [Benchmark(Description = "Create record w/ transactions (interface)")]
+        public void CreateRecord()
+        {
+            CreateRecordShared();
         }
     }
 }

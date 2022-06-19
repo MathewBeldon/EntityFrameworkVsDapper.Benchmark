@@ -9,6 +9,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
     {
         protected IBaseRepository<Benches> _baseGenericBenchRepository;
         protected IBenchRepository _benchRepository;
+        private Random random = new Random(); 
 
         protected int iterator = 1;
         protected void IncrementIterator()
@@ -52,11 +53,27 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
             var result = _benchRepository.GetBenchPopulated(iterator);
             if (result is not null && result.Id != iterator) throw new NullReferenceException();
         }
+
         protected void PagedRecordsPopulatedShared()
         {
             IncrementPage();
             var result = _benchRepository.GetBenchPopulatedPage(page: page, pageSize: 20, totalCount: DatabaseConstants.RecordCount);
             if (result.Count() != 20) throw new NullReferenceException();
+        }
+
+        protected void CreateRecordShared()
+        {
+            _benchRepository.CreateBench(new Benches
+            {
+                MaterialId = random.Next(1, 10001),
+                StyleId = random.Next(1, 10001),
+                Name = "Created Name",
+                Description = "Created Description",
+                Cost = random.Next(1, 1000),
+                Height = random.Next(1, 1000),
+                Width = random.Next(1, 1000),
+                Depth = random.Next(1, 1000)
+            });
         }
     }
 }

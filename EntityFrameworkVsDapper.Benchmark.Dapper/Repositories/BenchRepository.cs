@@ -124,9 +124,55 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
                 );
         }
 
-        public void CreateBench(Benches benche)
+        public void CreateBench(Benches bench)
         {
-            throw new NotImplementedException();
+            const string sql =
+                @$"
+                    INSERT INTO Benches
+                    (
+                        MaterialId,
+                        StyleId,
+                        Name,
+                        Description,
+                        Cost,
+                        Height,
+                        Width,
+                        Depth,
+                        CreatedDateUtc
+                    )
+                    VALUES
+                    (
+                        @MaterialId,
+                        @StyleId,
+                        @Name,
+                        @Description,
+                        @Cost,
+                        @Height,
+                        @Width,
+                        @Depth,
+                        @CreatedDateUtc
+                    );";
+
+            var commandDefinition = new CommandDefinition(sql, new
+            {
+                MaterialId = bench.MaterialId,
+                StyleId = bench.StyleId,
+                Name = bench.Name,
+                Description = bench.Description,
+                Cost = bench.Cost,
+                Height = bench.Height,
+                Width = bench.Width,
+                Depth = bench.Depth,
+                CreatedDateUtc = DateTime.UtcNow
+            });
+
+            _context.connection.Open();
+            using (var transaction = _context.connection.BeginTransaction())
+            {
+                transaction.Connection.Execute(commandDefinition);
+                transaction.Commit();
+            }
+            _context.connection.Close();
         }
 
         public void DeleteBench(int id)
@@ -134,7 +180,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
             throw new NotImplementedException();
         }
 
-        public void UpdateBench(Benches benche)
+        public void UpdateBench(Benches bench)
         {
             throw new NotImplementedException();
         }        

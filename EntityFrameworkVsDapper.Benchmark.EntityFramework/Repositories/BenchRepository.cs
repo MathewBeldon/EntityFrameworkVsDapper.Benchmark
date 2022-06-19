@@ -213,12 +213,30 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
             return GetBenchPopulatedPagedCompiled(_context, page, pageSize, totalCount);
         }
 
-        public void CreateBench(Benches benche)
-        {
-            throw new NotImplementedException();
+        public void CreateBench(Benches bench)
+        {            
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    _context.ChangeTracker.AutoDetectChangesEnabled = false;
+                    _context.Benches.Add(bench);
+                    _context.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
+                finally
+                {
+                    _context.ChangeTracker.AutoDetectChangesEnabled = true;
+                }
+            }
         }
 
-        public void UpdateBench(Benches benche)
+        public void UpdateBench(Benches bench)
         {
             throw new NotImplementedException();
         }

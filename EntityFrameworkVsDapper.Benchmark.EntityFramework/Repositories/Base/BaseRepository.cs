@@ -17,7 +17,6 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories.Base
             EF.CompileQuery((BenchmarkDbContext context, int id) => 
                 context
                     .Set<T>()
-                    .AsNoTracking()
                     .First(p => p.Id == id));
         public T GetById(int id)
         {
@@ -28,7 +27,6 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories.Base
             EF.CompileQuery((BenchmarkDbContext context, int page, int pageSize, int totalCount) =>
                 context
                     .Set<T>()
-                    .AsNoTracking()
                     .OrderByDescending(x => x.Id)
                     .Where(a => a.Id <= totalCount - (pageSize * (page - 1)))
                     .Take(pageSize));

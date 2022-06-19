@@ -31,13 +31,13 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
             _context.Dispose();            
         }
 
-        [Benchmark(Description = "Single record <T> (interface)")]
+        [Benchmark(Description = "Single record T (interface)")]
         public void GenericSingleRecord()
         {
             GenericSingleRecordShared();
         }
 
-        [Benchmark(Description = "Paged records <T> (interface)")]
+        [Benchmark(Description = "Paged records T (interface)")]
         public void GenericPagedRecords()
         {
             GenericPagedRecordsShared();
@@ -61,10 +61,16 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
             PagedRecordsPopulatedShared();
         }
 
-        [Benchmark(Description = "Create record w/ transactions (interface)")]
+        [Benchmark(Description = "Create record (interface)")]
         public void CreateRecord()
         {
             CreateRecordShared();
+        }
+
+        [Benchmark(Description = "Create then delete record (interface)")]
+        public void CreateDeleteRecord()
+        {
+            CreateDeleteRecordShared();
         }
     }
 }

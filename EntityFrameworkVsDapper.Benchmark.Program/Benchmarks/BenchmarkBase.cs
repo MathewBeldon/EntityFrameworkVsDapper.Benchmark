@@ -75,5 +75,21 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
                 Depth = random.Next(1, 1000)
             });
         }
+
+        protected void CreateDeleteRecordShared()
+        {
+            var bench = _benchRepository.CreateBench(new Benches
+            {
+                MaterialId = random.Next(1, 10001),
+                StyleId = random.Next(1, 10001),
+                Name = "Created Name",
+                Description = "Created Description",
+                Cost = random.Next(1, 1000),
+                Height = random.Next(1, 1000),
+                Width = random.Next(1, 1000),
+                Depth = random.Next(1, 1000)
+            });
+            _benchRepository.DeleteBench(bench.Id);
+        }
     }
 }

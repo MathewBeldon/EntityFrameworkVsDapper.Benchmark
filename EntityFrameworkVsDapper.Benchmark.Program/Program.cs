@@ -10,14 +10,15 @@ namespace EntityFrameworkVsDapper.Benchmark.Program
         {
             _ = BenchmarkRunner.Run(typeof(BenchmarkBase).Assembly, new CustomConfig());
             //new BenchmarkSwitcher(typeof(BenchmarkBase).Assembly).Run(new string[0], new CustomConfig());
-            //var benchmark = new DatabaseBenchmarks();
+
+            //var benchmark = new EntityFrameworkBenchmarks();
             //benchmark.GlobalSetupEntityFramework();
-            //benchmark.EntityFramework_Bench_OneRecordPopulated();
+            //benchmark.CreateRecord();
             //benchmark.GlobalCleanupEntityFramework();
 
-            //var benchmark = new DatabaseBenchmarks();
+            //var benchmark = new DapperBenchmarks();
             //benchmark.GlobalSetupDapper();
-            //benchmark.Dapper_Bench_OneRecordPopulated();
+            //benchmark.CreateRecord();
             //benchmark.GlobalCleanupDapper();
         }
     } 

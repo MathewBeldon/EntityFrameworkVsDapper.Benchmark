@@ -124,7 +124,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
                 );
         }
 
-        public void CreateBench(Benches bench)
+        public Benches CreateBench(Benches bench)
         {
             const string sql =
                 @$"
@@ -151,7 +151,9 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
                         @Width,
                         @Depth,
                         @CreatedDateUtc
-                    );";
+                    );
+                    SELECT LAST_INSERT_ID();";
+                    
 
             var commandDefinition = new CommandDefinition(sql, new
             {
@@ -169,20 +171,59 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
             _context.connection.Open();
             using (var transaction = _context.connection.BeginTransaction())
             {
-                transaction.Connection.Execute(commandDefinition);
-                transaction.Commit();
+                try
+                {                    
+                    bench.Id = transaction.Connection.Query<int>(commandDefinition).First();
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
+                finally
+                {
+                    _context.connection.Close();
+                }
             }
-            _context.connection.Close();
-        }
 
-        public void DeleteBench(int id)
-        {
-            throw new NotImplementedException();
+            return bench;
         }
 
         public void UpdateBench(Benches bench)
         {
             throw new NotImplementedException();
-        }        
+        }
+
+        public void DeleteBench(int id)
+        {
+            const string sql =
+                @$"
+                    DELETE FROM Benches
+                    WHERE Id = @Id";
+
+
+            var commandDefinition = new CommandDefinition(sql, new
+            {
+                Id = id
+            });
+
+            _context.connection.Open();
+            using (var transaction = _context.connection.BeginTransaction())
+            {
+                try
+                {
+                    transaction.Connection.Execute(commandDefinition);
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
+                finally
+                {
+                    _context.connection.Close();
+                }
+            }
+        }      
     }
 }

@@ -10,7 +10,7 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
         public BenchRepository(BenchmarkDbContext context) : base(context) { }
 
         private static readonly Func<BenchmarkDbContext, int, Benches> GetBenchCompiled =
-            EF.CompileQuery((BenchmarkDbContext context, int id) => context.Benches.AsNoTracking().First(p => p.Id == id));
+            EF.CompileQuery((BenchmarkDbContext context, int id) => context.Benches.First(p => p.Id == id));
         public Benches GetBench(int id)
         {
             return GetBenchCompiled(_context, id);
@@ -20,7 +20,6 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
             EF.CompileQuery((BenchmarkDbContext context, int id) => 
                 context
                     .Benches
-                    .AsNoTracking()
                     .Join(context.Materials,
                         bench => bench.MaterialId,
                         material => material.Id,
@@ -117,7 +116,6 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
             EF.CompileQuery((BenchmarkDbContext context, int page, int pageSize, int totalCount) =>
                 context
                     .Benches
-                    .AsNoTracking()
                     .Join(context.Materials,
                         bench => bench.MaterialId,
                         material => material.Id,
@@ -213,13 +211,12 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
             return GetBenchPopulatedPagedCompiled(_context, page, pageSize, totalCount);
         }
 
-        public void CreateBench(Benches bench)
+        public Benches CreateBench(Benches bench)
         {            
             using (var transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
-                    _context.ChangeTracker.AutoDetectChangesEnabled = false;
                     _context.Benches.Add(bench);
                     _context.SaveChanges();
 
@@ -229,11 +226,8 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
                 {
                     transaction.Rollback();
                 }
-                finally
-                {
-                    _context.ChangeTracker.AutoDetectChangesEnabled = true;
-                }
             }
+            return bench;
         }
 
         public void UpdateBench(Benches bench)
@@ -243,7 +237,20 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
 
         public void DeleteBench(int id)
         {
-            throw new NotImplementedException();
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {                   
+                    _context.Remove(_context.Benches.First(x => x.Id == id));
+                    _context.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
+            }
         }
     }
 }

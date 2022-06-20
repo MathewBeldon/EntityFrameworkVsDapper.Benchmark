@@ -9,7 +9,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
     {
         protected IBaseRepository<Benches> _baseGenericBenchRepository;
         protected IBenchRepository _benchRepository;
-        private Random random = new Random(); 
+        protected Random random = new Random(); 
 
         protected int iterator = 1;
         protected void IncrementIterator()
@@ -90,6 +90,32 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
                 Depth = random.Next(1, 1000)
             });
             _benchRepository.DeleteBench(bench.Id);
+        }
+
+        protected void CreateUpdateRecordShared()
+        {
+            var bench = _benchRepository.CreateBench(new Benches
+            {
+                MaterialId = random.Next(1, 10001),
+                StyleId = random.Next(1, 10001),
+                Name = "Created Name",
+                Description = "Created Description",
+                Cost = random.Next(1, 1000),
+                Height = random.Next(1, 1000),
+                Width = random.Next(1, 1000),
+                Depth = random.Next(1, 1000)
+            });
+
+            bench.MaterialId = random.Next(1, 10001);
+            bench.StyleId = random.Next(1, 10001);
+            bench.Name = "Created Name New";
+            bench.Description = "Created Description New";
+            bench.Cost = random.Next(1, 1000);
+            bench.Height = random.Next(1, 1000);
+            bench.Width = random.Next(1, 1000);
+            bench.Depth = random.Next(1, 1000);
+
+            _benchRepository.UpdateBench(bench);
         }
     }
 }

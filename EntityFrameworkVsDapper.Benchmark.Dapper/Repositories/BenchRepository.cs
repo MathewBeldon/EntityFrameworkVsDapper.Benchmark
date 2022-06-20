@@ -191,7 +191,52 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
 
         public void UpdateBench(Benches bench)
         {
-            throw new NotImplementedException();
+            const string sql =
+                @$"
+                    UPDATE Benches
+                    SET
+                        MaterialId = @MaterialId,
+                        StyleId = @StyleId,
+                        Name = @Name,
+                        Description = @Description,
+                        Cost = @Cost,
+                        Height = @Height,
+                        Width = @Width,
+                        Depth = @Depth,
+                        ModifiedDateUtc = UTC_TIMESTAMP()
+                    WHERE Id = @Id";
+
+            var commandDefinition = new CommandDefinition(sql, new
+            {
+                Id = bench.Id,
+                MaterialId = bench.MaterialId,
+                StyleId = bench.StyleId,
+                Name = bench.Name,
+                Description = bench.Description,
+                Cost = bench.Cost,
+                Height = bench.Height,
+                Width = bench.Width,
+                Depth = bench.Depth,
+                CreatedDateUtc = DateTime.UtcNow
+            });
+
+            _context.connection.Open();
+            using (var transaction = _context.connection.BeginTransaction())
+            {
+                try
+                {
+                    bench.Id = transaction.Connection.Execute(commandDefinition);
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
+                finally
+                {
+                    _context.connection.Close();
+                }
+            }
         }
 
         public void DeleteBench(int id)

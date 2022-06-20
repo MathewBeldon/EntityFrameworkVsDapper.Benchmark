@@ -232,7 +232,20 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
 
         public void UpdateBench(Benches bench)
         {
-            throw new NotImplementedException();
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    _context.Update(bench);
+                    _context.SaveChanges();
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
+            }
         }
 
         public void DeleteBench(int id)

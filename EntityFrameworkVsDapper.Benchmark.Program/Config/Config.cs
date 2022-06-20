@@ -35,7 +35,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Config
                    .WithIterationCount(10)
             );
 
-            Orderer = new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest);
+            Orderer = new DefaultOrderer(SummaryOrderPolicy.Method);
             Options |= ConfigOptions.JoinSummary;
         }
     }

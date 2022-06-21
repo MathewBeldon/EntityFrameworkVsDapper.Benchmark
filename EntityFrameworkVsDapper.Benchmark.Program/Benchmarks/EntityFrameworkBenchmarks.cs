@@ -1,79 +1,73 @@
 ﻿using BenchmarkDotNet.Attributes;
 using EntityFrameworkVsDapper.Benchmark.Core.Entities;
 using EntityFrameworkVsDapper.Benchmark.EntityFramework;
-using EntityFrameworkVsDapper.Benchmark.Program.Constants;
-using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
 {
     [Description("EF")]
     public class EntityFrameworkBenchmarks : BenchmarkBase
-    {        
-        private BenchmarkDbContext _context;
-
+    {
         [GlobalSetup]
         public void GlobalSetupEntityFramework()
         {
-            var builder = new DbContextOptionsBuilder<BenchmarkDbContext>();
-            var serverVersion = new MySqlServerVersion(DatabaseConstants.MySqlVersion);
-            builder.UseMySql(DatabaseConstants.ConnectionString, serverVersion);
-            _context = new BenchmarkDbContext(builder.Options);
-            _baseGenericBenchRepository = new EntityFramework.Repositories.Base.BaseRepository<Benches>(_context);
-            _benchRepository = new EntityFramework.Repositories.BenchRepository(_context);
+            _baseGenericBenchRepository = new EntityFramework.Repositories.Base.BaseRepository<Benches>();
+            _benchRepository = new EntityFramework.Repositories.BenchRepository();
         }
 
         [GlobalCleanup]
         public void GlobalCleanupEntityFramework()
         {
-            var delete = _context.Benches.Where(x => x.Id > 10000);
-            _context.RemoveRange(delete);
-            _context.Dispose();            
+            using (var context = new BenchmarkDbContext())
+            {
+                var delete = context.Benches.Where(x => x.Id > 10000);
+                context.RemoveRange(delete);
+            }
         }
 
-        [Benchmark(Description = "Read record T (interface)")]
+        [Benchmark(Description = "Read record T")]
         public void GenericSingleRecord()
         {
             GenericSingleRecordShared();
         }
 
-        [Benchmark(Description = "Read paged records T (interface)")]
+        [Benchmark(Description = "Read paged records T")]
         public void GenericPagedRecords()
         {
             GenericPagedRecordsShared();
         }
 
-        [Benchmark(Description = "Read record (interface)")]
+        [Benchmark(Description = "Read record")]
         public void SingleRecord()
         {
             SingleRecordShared();
         }
 
-        [Benchmark(Description = "Read record w/ joins (interface)")]
+        [Benchmark(Description = "Read record w/ joins")]
         public void SingleRecordPopulated()
         {
             SingleRecordPopulatedShared();
         }
 
-        [Benchmark(Description = "Read paged records w/ joins (interface)")]
+        [Benchmark(Description = "Read paged records w/ joins")]
         public void PagedRecordsPopulated()
         {
             PagedRecordsPopulatedShared();
         }
 
-        [Benchmark(Description = "Create record (interface)")]
+        [Benchmark(Description = "Create record")]
         public void CreateRecord()
         {
             CreateRecordShared();
         }
 
-        [Benchmark(Description = "Create then delete record (interface)")]
+        [Benchmark(Description = "Create then delete record")]
         public void CreateDeleteRecord()
         {
             CreateDeleteRecordShared();
         }
 
-        [Benchmark(Description = "Create then update record (interface)")]
+        [Benchmark(Description = "Create then update record")]
         public void CreateUpdateRecord()
         {
             CreateUpdateRecordShared();

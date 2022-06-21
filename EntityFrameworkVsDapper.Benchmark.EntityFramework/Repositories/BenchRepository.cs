@@ -6,14 +6,17 @@ using Microsoft.EntityFrameworkCore;
 namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
 {
     public sealed class BenchRepository : BaseRepository<Benches>, IBenchRepository
-    {
-        public BenchRepository(BenchmarkDbContext context) : base(context) { }
+    {        
+        public BenchRepository() : base() { }
 
         private static readonly Func<BenchmarkDbContext, int, Benches> GetBenchCompiled =
             EF.CompileQuery((BenchmarkDbContext context, int id) => context.Benches.First(p => p.Id == id));
         public Benches GetBench(int id)
         {
-            return GetBenchCompiled(_context, id);
+            using (var context = new BenchmarkDbContext())
+            {
+                return GetBenchCompiled(context, id);
+            }
         }
 
         private static readonly Func<BenchmarkDbContext, int, Benches> GetBenchPopulatedCompiled =
@@ -109,7 +112,10 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
                     ).First(x => x.Id == id));
         public Benches GetBenchPopulated(int id)
         {
-            return GetBenchPopulatedCompiled(_context, id);
+            using (var context = new BenchmarkDbContext())
+            {
+                return GetBenchPopulatedCompiled(context, id);
+            }
         }
 
         private static readonly Func<BenchmarkDbContext, int, int, int, IEnumerable<Benches>> GetBenchPopulatedPagedCompiled =
@@ -208,17 +214,21 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
                     .Take(pageSize));
         public IEnumerable<Benches> GetBenchPopulatedPage(int page, int pageSize, int totalCount)
         {
-            return GetBenchPopulatedPagedCompiled(_context, page, pageSize, totalCount);
+            using (var context = new BenchmarkDbContext())
+            {
+                return GetBenchPopulatedPagedCompiled(context, page, pageSize, totalCount).ToList();
+            }
         }
 
         public Benches CreateBench(Benches bench)
-        {            
-            using (var transaction = _context.Database.BeginTransaction())
+        {
+            using (var context = new BenchmarkDbContext())            
+            using (var transaction = context.Database.BeginTransaction())
             {
                 try
                 {
-                    _context.Benches.Add(bench);
-                    _context.SaveChanges();
+                    context.Benches.Add(bench);
+                    context.SaveChanges();
 
                     transaction.Commit();
                 }
@@ -226,18 +236,19 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
                 {
                     transaction.Rollback();
                 }
+                return bench;
             }
-            return bench;
         }
 
         public void UpdateBench(Benches bench)
         {
-            using (var transaction = _context.Database.BeginTransaction())
+            using (var context = new BenchmarkDbContext())
+            using (var transaction = context.Database.BeginTransaction())
             {
                 try
                 {
-                    _context.Update(bench);
-                    _context.SaveChanges();
+                    context.Update(bench);
+                    context.SaveChanges();
 
                     transaction.Commit();
                 }
@@ -250,12 +261,13 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories
 
         public void DeleteBench(int id)
         {
-            using (var transaction = _context.Database.BeginTransaction())
+            using (var context = new BenchmarkDbContext())
+            using (var transaction = context.Database.BeginTransaction())
             {
                 try
-                {                   
-                    _context.Remove(_context.Benches.First(x => x.Id == id));
-                    _context.SaveChanges();
+                {
+                    context.Remove(context.Benches.First(x => x.Id == id));
+                    context.SaveChanges();
 
                     transaction.Commit();
                 }

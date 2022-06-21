@@ -27,49 +27,49 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
             _connection.Dispose();
         }
 
-        [Benchmark(Description = "Read record T (interface)")]
+        [Benchmark(Description = "Read record T")]
         public void GenericSingleRecord()
         {
             GenericSingleRecordShared();
         }
 
-        [Benchmark(Description = "Read paged records T (interface)")]
+        [Benchmark(Description = "Read paged records T")]
         public void GenericPagedRecords()
         {
             GenericPagedRecordsShared();
         }
 
-        [Benchmark(Description = "Read record (interface)")]
+        [Benchmark(Description = "Read record")]
         public void SingleRecord()
         {
             SingleRecordShared();
         }
 
-        [Benchmark(Description = "Read record w/ joins (interface)")]
+        [Benchmark(Description = "Read record w/ joins")]
         public void SingleRecordPopulated()
         {
             SingleRecordPopulatedShared();
         }
 
-        [Benchmark(Description = "Read paged records w/ joins (interface)")]
+        [Benchmark(Description = "Read paged records w/ joins")]
         public void PagedRecordsPopulated()
         {
             PagedRecordsPopulatedShared();
         }
 
-        [Benchmark(Description = "Create record (interface)")]
+        [Benchmark(Description = "Create record")]
         public void CreateRecord()
         {
             CreateRecordShared();
         }        
 
-        [Benchmark(Description = "Create then delete record (interface)")]
+        [Benchmark(Description = "Create then delete record")]
         public void CreateDeleteRecord()
         {
             CreateDeleteRecordShared();
         }
 
-        [Benchmark(Description = "Create then update record (interface)")]
+        [Benchmark(Description = "Create then update record")]
         public void CreateUpdateRecord()
         {
             CreateUpdateRecordShared();

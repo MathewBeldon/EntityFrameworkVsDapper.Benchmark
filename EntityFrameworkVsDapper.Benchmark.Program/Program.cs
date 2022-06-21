@@ -13,7 +13,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Program
 
             //var benchmark = new EntityFrameworkBenchmarks();
             //benchmark.GlobalSetupEntityFramework();
-            //benchmark.CreateRecord();
+            //benchmark.GenericPagedRecords();
             //benchmark.GlobalCleanupEntityFramework();
 
             //var benchmark = new DapperBenchmarks();

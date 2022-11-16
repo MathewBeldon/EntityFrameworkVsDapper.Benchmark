@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Ben
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkVsDapper.Benchmark.EntityFramework", "EntityFrameworkVsDapper.Benchmark.EntityFramework\EntityFrameworkVsDapper.Benchmark.EntityFramework.csproj", "{64D8BE6E-49C0-4057-8564-F2F70FBF7AB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkVsDapper.Benchmark.Seed", "EntityFrameworkVsDapper.Benchmark.Seed\EntityFrameworkVsDapper.Benchmark.Seed.csproj", "{D09A0839-CA47-44E4-95E7-1BFD3894D95B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{64D8BE6E-49C0-4057-8564-F2F70FBF7AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64D8BE6E-49C0-4057-8564-F2F70FBF7AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64D8BE6E-49C0-4057-8564-F2F70FBF7AB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D09A0839-CA47-44E4-95E7-1BFD3894D95B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D09A0839-CA47-44E4-95E7-1BFD3894D95B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D09A0839-CA47-44E4-95E7-1BFD3894D95B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D09A0839-CA47-44E4-95E7-1BFD3894D95B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

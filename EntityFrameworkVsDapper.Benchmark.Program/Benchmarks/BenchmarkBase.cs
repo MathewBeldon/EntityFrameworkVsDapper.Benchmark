@@ -7,7 +7,6 @@ using EntityFrameworkVsDapper.Benchmark.Program.Constants;
 
 namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
 {
-    [SimpleJob(RuntimeMoniker.Net60)]
     [SimpleJob(RuntimeMoniker.Net70)]
     public class BenchmarkBase
     {
@@ -19,7 +18,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
         protected void IncrementIterator()
         {
             iterator++;
-            if (iterator > DatabaseConstants.RecordCount) iterator = 1;
+            if (iterator >= DatabaseConstants.RecordCount) iterator = 1;
         }
 
         protected int page = 1;
@@ -69,8 +68,8 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
         {
             _benchRepository.CreateBench(new Benches
             {
-                MaterialId = random.Next(1, 10001),
-                StyleId = random.Next(1, 10001),
+                MaterialId = random.Next(1, 10000),
+                StyleId = random.Next(1, 10000),
                 Name = "Created Name",
                 Description = "Created Description",
                 Cost = random.Next(1, 1000),
@@ -84,8 +83,8 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
         {
             var bench = _benchRepository.CreateBench(new Benches
             {
-                MaterialId = random.Next(1, 10001),
-                StyleId = random.Next(1, 10001),
+                MaterialId = random.Next(1, 10000),
+                StyleId = random.Next(1, 10000),
                 Name = "Created Name",
                 Description = "Created Description",
                 Cost = random.Next(1, 1000),
@@ -100,8 +99,8 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
         {
             var bench = _benchRepository.CreateBench(new Benches
             {
-                MaterialId = random.Next(1, 10001),
-                StyleId = random.Next(1, 10001),
+                MaterialId = random.Next(1, 10000),
+                StyleId = random.Next(1, 10000),
                 Name = "Created Name",
                 Description = "Created Description",
                 Cost = random.Next(1, 1000),
@@ -110,8 +109,8 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
                 Depth = random.Next(1, 1000)
             });
 
-            bench.MaterialId = random.Next(1, 10001);
-            bench.StyleId = random.Next(1, 10001);
+            bench.MaterialId = random.Next(1, 10000);
+            bench.StyleId = random.Next(1, 10000);
             bench.Name = "Created Name New";
             bench.Description = "Created Description New";
             bench.Cost = random.Next(1, 1000);

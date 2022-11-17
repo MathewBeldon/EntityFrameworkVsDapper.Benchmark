@@ -11,7 +11,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Config
 {
     public sealed class CustomConfig : ManualConfig
     {
-        public const int Iterations = 500;
+        public const int Iterations = 20;
 
         public CustomConfig()
         {

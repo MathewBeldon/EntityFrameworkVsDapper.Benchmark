@@ -1,6 +1,36 @@
 #  EntityFrameworkVsDapper.Benchmark
 
-## DOTNET 6 LOCAL DB
+### Read Record
+
+NET|    ORM |                            DB |       Mean |        Min |        Max | Allocated |
+---|------- |------------------------------ |-----------:|-----------:|-----------:|----------:|
+  6| Dapper |                         Local |   342.3 us |   322.9 us |   374.3 us |  15.03 KB |
+  6|    EF6 |                         Local |   417.8 us |   409.9 us |   431.3 us |  70.46 KB |
+  7| Dapper |                         Local |   340.9 us |   339.5 us |   345.0 us |  15.03 KB |
+  7|    EF7 |                         Local |   393.7 us |   389.5 us |   399.4 us |  71.68 KB |
+  6| Dapper |                        Remote |  120.79 ms |  119.39 ms |  122.93 ms |  15.45 KB |
+  6|    EF6 |                        Remote |   74.66 ms |   71.63 ms |   77.28 ms |  77.74 KB |
+  7| Dapper |                        Remote |  122.61 ms |  118.00 ms |  129.72 ms |  15.45 KB |
+  7|    EF7 |                        Remote |   74.07 ms |   72.02 ms |   76.40 ms |  76.74 KB |
+
+### Create Record
+
+NET|    ORM |                            DB |       Mean |        Min |        Max | Allocated |
+---|------- |------------------------------ |-----------:|-----------:|-----------:|----------:|
+  6| Dapper |                         Local | 1,879.1 us | 1,829.3 us | 1,958.2 us |  28.98 KB |
+  6|    EF6 |               		  Local | 2,443.2 us | 2,328.2 us | 2,580.0 us |  96.79 KB |
+  7| Dapper |                         Local | 1,835.5 us | 1,808.6 us | 1,865.8 us |  28.98 KB |
+  7|    EF7 |                         Local | 2,348.3 us | 2,308.6 us | 2,402.0 us | 100.88 KB |
+  6| Dapper |                        Remote |  243.82 ms |  226.15 ms |  264.19 ms |  29.41 KB |
+  6|    EF6 |                        Remote |  290.05 ms |  257.20 ms |  329.96 ms |  102.2 KB |
+  7| Dapper |                        Remote |  226.55 ms |  223.04 ms |  230.38 ms |  29.41 KB |
+  7|    EF7 |                        Remote |  261.11 ms |  259.03 ms |  264.26 ms | 106.28 KB |
+
+
+
+## Full Benchmarks
+
+### DOTNET 6 LOCAL DB
 
 |    ORM |                        Method |       Mean |        Min |        Max |    Gen0 |   Gen1 | Allocated |
 |------- |------------------------------ |-----------:|-----------:|-----------:|--------:|-------:|----------:|
@@ -21,7 +51,7 @@
 | Dapper |                 'Read record' |   342.3 us |   322.9 us |   374.3 us |  2.4414 |      - |  15.03 KB |
 |     EF |                 'Read record' |   417.8 us |   409.9 us |   431.3 us | 10.7422 |      - |  70.46 KB |
 
-## DOTNET 7 LOCAL DB
+### DOTNET 7 LOCAL DB
 
 |    ORM |                        Method |       Mean |        Min |        Max |    Gen0 |   Gen1 | Allocated |
 |------- |------------------------------ |-----------:|-----------:|-----------:|--------:|-------:|----------:|
@@ -41,3 +71,45 @@
 |     EF |        'Read record w/ joins' |   423.4 us |   414.5 us |   439.3 us | 11.2305 | 0.4883 |  71.34 KB |
 | Dapper |                 'Read record' |   340.9 us |   339.5 us |   345.0 us |  2.0000 |      - |  15.03 KB |
 |     EF |                 'Read record' |   393.7 us |   389.5 us |   399.4 us | 11.0000 | 1.0000 |  71.68 KB |
+
+### DOTNET 6 REMOTE DB
+
+|    ORM |                        Method |      Mean |       Min |       Max | Allocated |
+|------- |------------------------------ |----------:|----------:|----------:|----------:|
+| Dapper |               'Create record' | 243.82 ms | 226.15 ms | 264.19 ms |  29.41 KB |
+|     EF |               'Create record' | 290.05 ms | 257.20 ms | 329.96 ms |  102.2 KB |
+| Dapper |   'Create then delete record' | 458.05 ms | 435.12 ms | 484.98 ms |  42.24 KB |
+|     EF |   'Create then delete record' | 580.83 ms | 551.84 ms | 617.94 ms | 197.74 KB |
+| Dapper |   'Create then update record' | 477.78 ms | 442.92 ms | 544.15 ms |  52.59 KB |
+|     EF |   'Create then update record' | 542.39 ms | 518.36 ms | 558.24 ms | 197.08 KB |
+| Dapper |        'Read paged records T' | 120.87 ms | 119.55 ms | 122.90 ms |  48.55 KB |
+|     EF |        'Read paged records T' |  88.00 ms |  84.39 ms |  94.20 ms | 108.82 KB |
+| Dapper | 'Read paged records w/ joins' | 149.12 ms | 142.47 ms | 165.76 ms |   76.7 KB |
+|     EF | 'Read paged records w/ joins' |  88.35 ms |  84.11 ms |  92.30 ms | 105.08 KB |
+| Dapper |               'Read record T' | 120.45 ms | 118.05 ms | 122.99 ms |  15.62 KB |
+|     EF |               'Read record T' |  74.37 ms |  72.12 ms |  76.07 ms |  77.74 KB |
+| Dapper |        'Read record w/ joins' | 141.84 ms | 139.09 ms | 148.53 ms |  36.97 KB |
+|     EF |        'Read record w/ joins' |  85.16 ms |  82.56 ms |  86.97 ms |  75.17 KB |
+| Dapper |                 'Read record' | 120.79 ms | 119.39 ms | 122.93 ms |  15.45 KB |
+|     EF |                 'Read record' |  74.66 ms |  71.63 ms |  77.28 ms |  77.74 KB |
+
+### DOTNET 7 REMOTE DB
+
+|    ORM |                        Method |      Mean |       Min |       Max | Allocated |
+|------- |------------------------------ |----------:|----------:|----------:|----------:|
+| Dapper |               'Create record' | 226.55 ms | 223.04 ms | 230.38 ms |  29.41 KB |
+|     EF |               'Create record' | 261.11 ms | 259.03 ms | 264.26 ms | 106.28 KB |
+| Dapper |   'Create then delete record' | 509.29 ms | 470.73 ms | 594.58 ms |  42.23 KB |
+|     EF |   'Create then delete record' | 575.23 ms | 554.01 ms | 618.15 ms | 200.79 KB |
+| Dapper |   'Create then update record' | 460.32 ms | 445.83 ms | 490.78 ms |  52.59 KB |
+|     EF |   'Create then update record' | 523.93 ms | 514.24 ms | 540.06 ms | 201.67 KB |
+| Dapper |        'Read paged records T' | 121.68 ms | 119.60 ms | 123.82 ms |  48.55 KB |
+|     EF |        'Read paged records T' |  88.22 ms |  85.25 ms |  93.19 ms |  110.7 KB |
+| Dapper | 'Read paged records w/ joins' | 143.41 ms | 141.67 ms | 144.50 ms |   76.7 KB |
+|     EF | 'Read paged records w/ joins' |  89.76 ms |  87.42 ms |  94.17 ms | 104.83 KB |
+| Dapper |               'Read record T' | 118.74 ms | 116.53 ms | 120.85 ms |  15.62 KB |
+|     EF |               'Read record T' |  74.35 ms |  72.48 ms |  75.68 ms |  76.74 KB |
+| Dapper |        'Read record w/ joins' | 142.19 ms | 140.49 ms | 145.02 ms |  36.97 KB |
+|     EF |        'Read record w/ joins' |  88.42 ms |  86.41 ms |  91.14 ms |  73.77 KB |
+| Dapper |                 'Read record' | 122.61 ms | 118.00 ms | 129.72 ms |  15.45 KB |
+|     EF |                 'Read record' |  74.07 ms |  72.02 ms |  76.40 ms |  76.74 KB |

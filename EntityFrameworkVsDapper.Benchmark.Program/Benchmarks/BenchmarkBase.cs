@@ -7,7 +7,6 @@ using EntityFrameworkVsDapper.Benchmark.Program.Constants;
 
 namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
 {
-    [SimpleJob(RuntimeMoniker.Net70)]
     public class BenchmarkBase
     {
         protected IBaseRepository<Benches> _baseGenericBenchRepository;

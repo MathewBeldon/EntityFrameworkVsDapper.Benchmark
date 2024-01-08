@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntityFrameworkVsDapper.Benchmark.Dapper\EntityFrameworkVsDapper.Benchmark.Dapper.csproj" />
+    <ProjectReference Include="..\EntityFrameworkVsDapper.Benchmark.Domain\EntityFrameworkVsDapper.Benchmark.Core.csproj" />
+    <ProjectReference Include="..\EntityFrameworkVsDapper.Benchmark.EntityFramework\EntityFrameworkVsDapper.Benchmark.EntityFramework.csproj" />
+  </ItemGroup>
+
+</Project>

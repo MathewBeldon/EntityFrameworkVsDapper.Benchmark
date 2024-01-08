@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using EntityFrameworkVsDapper.Benchmark.Core.Common;
+using EntityFrameworkVsDapper.Benchmark.Core.Entities.Common;
 using EntityFrameworkVsDapper.Benchmark.Core.Contracts.Repository.Base;
 
 namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories.Base
@@ -36,8 +36,8 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories.Base
                 @$"
                     SELECT * 
                     FROM {_tableName}
-                    WHERE Id <= (@TotalCount - (@PageSize * (@Page - 1)))
-                    ORDER BY Id DESC
+                    WHERE id <= (@TotalCount - (@PageSize * (@Page - 1)))
+                    ORDER BY id DESC
                     LIMIT @PageSize";
 
             var commandDefinition = new CommandDefinition(sql, new

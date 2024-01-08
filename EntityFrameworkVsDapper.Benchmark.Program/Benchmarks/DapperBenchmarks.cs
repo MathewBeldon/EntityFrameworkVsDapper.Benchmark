@@ -1,8 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
 using Dapper;
+using EntityFrameworkVsDapper.Benchmark.Core.Constants;
 using EntityFrameworkVsDapper.Benchmark.Core.Entities;
 using EntityFrameworkVsDapper.Benchmark.Dapper;
-using EntityFrameworkVsDapper.Benchmark.Program.Constants;
 using System.ComponentModel;
 
 namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks

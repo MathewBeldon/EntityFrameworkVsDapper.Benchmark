@@ -1,5 +1,5 @@
-﻿using EntityFrameworkVsDapper.Benchmark.Core.Common;
-using EntityFrameworkVsDapper.Benchmark.Core.Contracts.Repository.Base;
+﻿using EntityFrameworkVsDapper.Benchmark.Core.Contracts.Repository.Base;
+using EntityFrameworkVsDapper.Benchmark.Core.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Repositories.Base

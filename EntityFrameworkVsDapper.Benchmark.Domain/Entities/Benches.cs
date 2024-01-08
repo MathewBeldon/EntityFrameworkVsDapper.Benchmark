@@ -1,4 +1,4 @@
-﻿using EntityFrameworkVsDapper.Benchmark.Core.Common;
+﻿using EntityFrameworkVsDapper.Benchmark.Core.Entities.Common;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntityFrameworkVsDapper.Benchmark.Core.Entities

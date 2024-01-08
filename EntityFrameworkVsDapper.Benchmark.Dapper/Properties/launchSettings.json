@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "EntityFrameworkVsDapper.Benchmark.Dapper": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:59860;http://localhost:59864"
+    }
+  }
+}

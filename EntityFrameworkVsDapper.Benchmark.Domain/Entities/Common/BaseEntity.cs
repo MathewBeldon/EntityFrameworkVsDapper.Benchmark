@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace EntityFrameworkVsDapper.Benchmark.Core.Common
+namespace EntityFrameworkVsDapper.Benchmark.Core.Entities.Common
 {
     [Index(nameof(Id))]
     public class BaseEntity

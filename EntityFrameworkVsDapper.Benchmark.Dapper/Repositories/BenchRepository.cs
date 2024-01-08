@@ -13,7 +13,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
         {
             const string sql =
                 @$"SELECT * 
-                  FROM Benches
+                  FROM benches
                   WHERE id = @Id";
 
             var commandDefinition = new CommandDefinition(sql, new
@@ -29,30 +29,30 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
             const string sql = 
                 @$"
                 SELECT 
-                    benches.Id,
-                    benches.MaterialId,
-                    benches.StyleId,
-                    benches.Name,
-                    benches.Description,
-                    benches.Cost,
-                    benches.Height,
-                    benches.Width,
-                    benches.Depth,
-                    materials.Id,
-                    materials.Name,
-                    materials.Description,
-                    materials.Cost,
-                    styles.Id,
-                    styles.Name,
-                    styles.Description,
-                    styles.BrandId,
-                    brands.Id,
-                    brands.Name,
-                    brands.Description
+                    benches.id,
+                    benches.material_id,
+                    benches.style_id,
+                    benches.name,
+                    benches.description,
+                    benches.cost,
+                    benches.height,
+                    benches.width,
+                    benches.depth,
+                    materials.id,
+                    materials.name,
+                    materials.description,
+                    materials.cost,
+                    styles.id,
+                    styles.name,
+                    styles.description,
+                    styles.brand_id,
+                    brands.id,
+                    brands.name,
+                    brands.description
                 FROM Benches benches 
-                INNER JOIN Materials materials on benches.MaterialId = materials.Id
-                INNER JOIN Styles styles on benches.StyleId = styles.Id
-                INNER JOIN Brands brands on styles.BrandId = brands.Id
+                INNER JOIN materials materials on benches.material_id = materials.id
+                INNER JOIN styles styles on benches.style_id = styles.id
+                INNER JOIN brands brands on styles.brand_id = brands.id
                 WHERE benches.id = @Id";
 
             return _context.connection.Query<Benches, Materials, Styles, Brands, Benches>
@@ -66,7 +66,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
                         return benches;
                     },
                     param: new { Id = id }, 
-                    splitOn: "Id",
+                    splitOn: "id",
                     buffered: true
                 ).First();
         }
@@ -76,32 +76,32 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
             const string sql =
                 @$"
                 SELECT 
-                    benches.Id,
-                    benches.MaterialId,
-                    benches.StyleId,
-                    benches.Name,
-                    benches.Description,
-                    benches.Cost,
-                    benches.Height,
-                    benches.Width,
-                    benches.Depth,
-                    materials.Id,
-                    materials.Name,
-                    materials.Description,
-                    materials.Cost,
-                    styles.Id,
-                    styles.Name,
-                    styles.Description,
-                    styles.BrandId,
-                    brands.Id,
-                    brands.Name,
-                    brands.Description
-                FROM Benches benches 
-                INNER JOIN Materials materials on benches.MaterialId = materials.Id
-                INNER JOIN Styles styles on benches.StyleId = styles.Id
-                INNER JOIN Brands brands on styles.BrandId = brands.Id
-                WHERE benches.Id <= (@TotalCount - (@PageSize * (@Page - 1)))
-                ORDER BY benches.Id DESC
+                    benches.id,
+                    benches.material_id,
+                    benches.style_id,
+                    benches.name,
+                    benches.description,
+                    benches.cost,
+                    benches.height,
+                    benches.width,
+                    benches.depth,
+                    materials.id,
+                    materials.name,
+                    materials.description,
+                    materials.cost,
+                    styles.id,
+                    styles.name,
+                    styles.description,
+                    styles.brand_id,
+                    brands.id,
+                    brands.name,
+                    brands.description
+                FROM benches benches 
+                INNER JOIN materials materials on benches.material_id = materials.id
+                INNER JOIN styles styles on benches.style_id = styles.id
+                INNER JOIN brands brands on styles.brand_id = brands.id
+                WHERE benches.id <= (@TotalCount - (@PageSize * (@Page - 1)))
+                ORDER BY benches.id DESC
                 LIMIT @PageSize";
 
             return _context.connection.Query<Benches, Materials, Styles, Brands, Benches>
@@ -130,15 +130,15 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
                 @$"
                     INSERT INTO Benches
                     (
-                        MaterialId,
-                        StyleId,
-                        Name,
-                        Description,
-                        Cost,
-                        Height,
-                        Width,
-                        Depth,
-                        CreatedDateUtc
+                        material_id,
+                        style_id,
+                        name,
+                        description,
+                        cost,
+                        height,
+                        width,
+                        depth,
+                        created_date_utc
                     )
                     VALUES
                     (
@@ -195,16 +195,16 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
                 @$"
                     UPDATE Benches
                     SET
-                        MaterialId = @MaterialId,
-                        StyleId = @StyleId,
-                        Name = @Name,
-                        Description = @Description,
-                        Cost = @Cost,
-                        Height = @Height,
-                        Width = @Width,
-                        Depth = @Depth,
-                        ModifiedDateUtc = UTC_TIMESTAMP()
-                    WHERE Id = @Id";
+                        material_id = @MaterialId,
+                        style_id = @StyleId,
+                        name = @Name,
+                        description = @Description,
+                        cost = @Cost,
+                        height = @Height,
+                        width = @Width,
+                        depth = @Depth,
+                        modified_date_utc = UTC_TIMESTAMP()
+                    WHERE id = @Id";
 
             var commandDefinition = new CommandDefinition(sql, new
             {
@@ -243,8 +243,8 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper.Repositories
         {
             const string sql =
                 @$"
-                    DELETE FROM Benches
-                    WHERE Id = @Id";
+                    DELETE FROM benches
+                    WHERE id = @Id";
 
 
             var commandDefinition = new CommandDefinition(sql, new

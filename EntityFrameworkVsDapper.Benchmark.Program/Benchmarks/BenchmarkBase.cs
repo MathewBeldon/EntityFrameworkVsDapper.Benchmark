@@ -1,9 +1,9 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
+using EntityFrameworkVsDapper.Benchmark.Core.Constants;
 using EntityFrameworkVsDapper.Benchmark.Core.Contracts.Repository;
 using EntityFrameworkVsDapper.Benchmark.Core.Contracts.Repository.Base;
 using EntityFrameworkVsDapper.Benchmark.Core.Entities;
-using EntityFrameworkVsDapper.Benchmark.Program.Constants;
 
 namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
 {

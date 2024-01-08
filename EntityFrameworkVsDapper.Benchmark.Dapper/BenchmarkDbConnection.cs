@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Npgsql;
 using System.Data;
 
 namespace EntityFrameworkVsDapper.Benchmark.Dapper
@@ -9,7 +9,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Dapper
 
         public BenchmarkDbConnection(string connectionString)
         {
-            connection = new MySqlConnection(connectionString);
+            connection = new NpgsqlConnection(connectionString);
         }
 
         public void Dispose()

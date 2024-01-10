@@ -12,7 +12,7 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseNpgsql("Server=localhost;Port=5432;Database=benchmark;Uid=postgres;Pwd=password;")
+                .UseNpgsql(Environment.GetEnvironmentVariable("BENCHMARK_CONNECTION_STRING"))
                 .UseSnakeCaseNamingConvention();
         }
 
@@ -24,12 +24,6 @@ namespace EntityFrameworkVsDapper.Benchmark.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // Convert all table names to lowercase
-            foreach (var entity in modelBuilder.Model.GetEntityTypes())
-            {
-                modelBuilder.Entity(entity.Name).ToTable(entity.GetTableName().ToLowerInvariant());
-            }
         }
     }
 }

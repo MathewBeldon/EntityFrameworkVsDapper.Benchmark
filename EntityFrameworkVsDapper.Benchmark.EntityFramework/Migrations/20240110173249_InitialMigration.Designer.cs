@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EntityFrameworkVsDapper.Benchmark.EntityFramework.Migrations
 {
     [DbContext(typeof(BenchmarkDbContext))]
-    [Migration("20240110153624_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240110173249_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

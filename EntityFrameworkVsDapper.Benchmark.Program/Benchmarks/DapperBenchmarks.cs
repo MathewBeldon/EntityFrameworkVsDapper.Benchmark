@@ -1,6 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
 using Dapper;
-using EntityFrameworkVsDapper.Benchmark.Core.Constants;
 using EntityFrameworkVsDapper.Benchmark.Core.Entities;
 using EntityFrameworkVsDapper.Benchmark.Dapper;
 using System.ComponentModel;
@@ -15,7 +14,7 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
         [GlobalSetup]
         public void GlobalSetupDapper()
         {
-            _connection = new BenchmarkDbConnection(DatabaseConstants.ConnectionString);
+            _connection = new BenchmarkDbConnection(Environment.GetEnvironmentVariable("BENCHMARK_CONNECTION_STRING"));
             _baseGenericBenchRepository = new Dapper.Repositories.Base.BaseRepository<Benches>(_connection);
             _benchRepository = new Dapper.Repositories.BenchRepository(_connection);
         }

@@ -11,8 +11,6 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Config
 {
     public sealed class CustomConfig : ManualConfig
     {
-        public const int Iterations = 20;
-
         public CustomConfig()
         {
             AddLogger(ConsoleLogger.Default);
@@ -28,11 +26,11 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Config
             AddColumn(StatisticColumn.Max);
             AddColumnProvider(DefaultColumnProviders.Metrics);
 
-            AddJob(Job.ShortRun
-                   .WithLaunchCount(1)
-                   .WithWarmupCount(2)
-                   .WithUnrollFactor(Iterations)
-                   .WithIterationCount(10)
+            AddJob(Job.LongRun
+                   .WithLaunchCount(3)
+                   .WithWarmupCount(10)
+                   .WithUnrollFactor(1)
+                   .WithIterationCount(20)
             );
 
             Orderer = new DefaultOrderer(SummaryOrderPolicy.Method);

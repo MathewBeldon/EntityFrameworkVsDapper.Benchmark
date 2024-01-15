@@ -3,7 +3,7 @@ using System.Data;
 
 namespace EntityFrameworkVsDapper.Benchmark.Dapper
 {
-    public sealed class BenchmarkDbConnection : IDisposable
+    public class BenchmarkDbConnection : IDisposable
     {
         public readonly IDbConnection connection;
 

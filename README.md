@@ -1,4 +1,62 @@
-#  EntityFrameworkVsDapper.Benchmark
+# EntityFrameworkVsDapper.Benchmark
+
+---
+
+##  Environments
+
+### VPS
+
+- OVH: **C2-7**
+- **2 vCores** (3 GHz)
+- **7 GB RAM**
+- **250 Mbit/s**
+
+
+### Database
+
+- OVH: **db1-4**
+- **1 node**
+- **2 vCores**
+- **4 GB RAM**
+
+---
+
+## Benchmarks
+
+These results are the **best (lowest mean)** from multiple runs.
+
+### Create record 
+
+| TFM   | EF Mean (ms) | Dapper Mean (ms) | EF Alloc (KB) | Dapper Alloc (KB) |
+|------|--------------:|-----------------:|--------------:|------------------:|
+| net6 | 3.418         | 2.147            | 69.06         | 12.48             |
+| net8 | 3.248         | 2.113            | 69.27         | 14.68             |
+| net10| 3.297         | 1.954            | 69.40         | 12.27             |
+
+---
+
+### Read record 
+
+| TFM   | EF Mean (ms) | Dapper Mean (ms) | EF Alloc (KB) | Dapper Alloc (KB) |
+|------|--------------:|-----------------:|--------------:|------------------:|
+| net6 | 1.040         | 0.607            | 47.17         | 2.18              |
+| net8 | 0.967         | 0.679            | 49.45         | 1.89              |
+| net10| 0.888         | 0.592            | 51.48         | 1.90              |
+
+---
+
+### Read record w/ joins 
+
+| TFM   | EF Mean (ms) | Dapper Mean (ms) | EF Alloc (KB) | Dapper Alloc (KB) |
+|------|--------------:|-----------------:|--------------:|------------------:|
+| net6 | 2.059         | 1.546            | 46.95         | 5.41              |
+| net8 | 2.090         | 1.592            | 49.22         | 4.83              |
+| net10| 2.148         | 1.626            | 51.38         | 4.84              |
+
+---
+
+## Legacy Benchmarks 
+
 
 ### Read Record
 
@@ -26,7 +84,7 @@ NET|    ORM |                            DB |       Mean |        Min |        M
   7| Dapper |                        Remote |  226.55 ms |  223.04 ms |  230.38 ms |  29.41 KB |
   7|    EF7 |                        Remote |  261.11 ms |  259.03 ms |  264.26 ms | 106.28 KB |
 
-
+---
 
 ## Full Benchmarks
 

@@ -25,17 +25,17 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
             }
         }
 
-        [Benchmark(Description = "Read record T")]
-        public void GenericSingleRecord()
-        {
-            GenericSingleRecordShared();
-        }
+        // [Benchmark(Description = "Read record T")]
+        // public void GenericSingleRecord()
+        // {
+        //     GenericSingleRecordShared();
+        // }
 
-        [Benchmark(Description = "Read paged records T")]
-        public void GenericPagedRecords()
-        {
-            GenericPagedRecordsShared();
-        }
+        // [Benchmark(Description = "Read paged records T")]
+        // public void GenericPagedRecords()
+        // {
+        //     GenericPagedRecordsShared();
+        // }
 
         [Benchmark(Description = "Read record")]
         public void SingleRecord()
@@ -49,11 +49,11 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
             SingleRecordPopulatedShared();
         }
 
-        [Benchmark(Description = "Read paged records w/ joins")]
-        public void PagedRecordsPopulated()
-        {
-            PagedRecordsPopulatedShared();
-        }
+        // [Benchmark(Description = "Read paged records w/ joins")]
+        // public void PagedRecordsPopulated()
+        // {
+        //     PagedRecordsPopulatedShared();
+        // }
 
         [Benchmark(Description = "Create record")]
         public void CreateRecord()
@@ -61,16 +61,16 @@ namespace EntityFrameworkVsDapper.Benchmark.Program.Benchmarks
             CreateRecordShared();
         }
 
-        [Benchmark(Description = "Create then delete record")]
-        public void CreateDeleteRecord()
-        {
-            CreateDeleteRecordShared();
-        }
+        //  [Benchmark(Description = "Create then delete record")]
+        //  public void CreateDeleteRecord()
+        //  {
+        //      CreateDeleteRecordShared();
+        //  }
 
-        [Benchmark(Description = "Create then update record")]
-        public void CreateUpdateRecord()
-        {
-            CreateUpdateRecordShared();
-        }
+        //  [Benchmark(Description = "Create then update record")]
+        //  public void CreateUpdateRecord()
+        //  {
+        //      CreateUpdateRecordShared();
+        //  }
     }
 }
